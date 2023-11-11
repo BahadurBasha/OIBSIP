@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background-color: #081b;
+        min-width: 100%;
+        width: 100%;
+      }
+      .container {
+        background-color: rgb(157, 24, 24);
+        margin: 0 auto;
+        width: 60%;
+        text-align: center;
+        margin-top: 50px;
+        padding: 1rem;
+        border-radius: 16px;
+      }
+      h1 {
+        margin-bottom: 1rem;
+        font-size: 36px;
+        text-shadow: 3px 2px #081b;
+      }
+      input[type="text"] {
+        padding: 10px 20px;
+        border: 2px solid rgb(0, 185, 247);
+        border-radius: 12px;
+        width: 80%;
+        margin-bottom: 10px;
+        font-size: 15px;
+        background-color: #f4f4f4;
+      }
+      #description {
+        border-radius: 12px;
+        margin-bottom: 10px;
+        width: 80%;
+        height: 80px;
+        font-size: 15px;
+        padding: 10px 20px;
+        border: 2px solid rgb(0, 255, 106);
+      }
+      #add-btn {
+        color: #081b29;
+        font-size: 15px;
+        padding: 10px;
+        border-radius: 12px;
+        width: 50%;
+        margin-bottom: 10px;
+        background-color: rgb(97, 250, 125);
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+      #add-btn:hover {
+        color: rgb(9, 155, 213);
+        background-color: #f4f4f4;
+      }
+      .tasks-container {
+        background-color: aqua;
+        width: 80%;
+        margin: 20px auto;
+        border-radius: 16px;
+        padding: 1rem;
+      }
+      ul {
+        list-style: none;
+      }
+      ul li {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 2px solid #081b29;
+        border-radius: 12px;
+        margin-bottom: 5px;
+      }
+      ul li {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 15px;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      .delete-btn {
+        padding: 7px 14px;
+        background-color: rgb(97, 255, 100);
+        font-weight: bold;
+        color: #081b29;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+      }
+      @media (max-width: 500px) {
+        .container {
+          width: 90%;
+        }
+        .tasks-container {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>My To-Do List</h1>
+      <input id="title" type="text" placeholder="Enter New Task..." />
+      <textarea
+        id="description"
+        placeholder="Enter Your task description here..."
+      ></textarea>
+      <button id="add-btn">Add Task</button>
+    </div>
+    <div class="tasks-container">
+      <ul id="task-list">
+        <li><span>title</span><span>description</span><span>Done</span></li>
+      </ul>
+    </div>
+    <script>
+      const taskTitle = document.getElementById("title");
+      const taskDescription = document.getElementById("description");
+      const addTaskBtn = document.getElementById("add-btn");
+      const taskUList = document.getElementById("task-list");
+      addTaskBtn.addEventListener("click", () => {
+        const newItem = document.createElement("li");
+        newItem.classList.add("flex-item");
+        var span1 = document.createElement("span");
+        span1.textContent = taskTitle.value;
+
+        var span2 = document.createElement("span");
+        span2.textContent = taskDescription.value;
+
+        const btn = document.createElement("button");
+        btn.textContent = "Completed";
+        btn.classList.add("delete-btn");
+
+        var span3 = document.createElement("span");
+        span3.appendChild(btn);
+
+        newItem.appendChild(span1);
+        newItem.appendChild(span2);
+        newItem.appendChild(span3);
+        taskUList.appendChild(newItem);
+
+        btn.addEventListener("click", () => {
+          var listItem = btn.parentNode.parentNode;
+          listItem.remove();
+        });
+      });
+    </script>
+  </body>
+</html>
