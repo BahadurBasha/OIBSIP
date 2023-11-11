@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Browser</title>
+    <style>
+      * {
+        font-weight: bold;
+        font-size: large;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #0e1538;
+      }
+      .container {
+        width: 50vw;
+        height: 400px;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+        background: #00c8ff;
+        border-radius: 20px;
+      }
+      .contents {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: auto auto;
+        padding: 10px;
+      }
+      .contents p {
+        display: none;
+        color: red;
+      }
+      input[type="text"],
+      textarea,
+      input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #000000;
+        color: black;
+      }
+      button {
+        margin: 10px 10px;
+        padding: 5px;
+        cursor: pointer;
+        background-color: chartreuse;
+        border-radius: 15px;
+      }
+    </style>
+    <script>
+      const convertTemp = () => {
+        let inputValue = document.getElementById("inputText").value;
+        let input = document.getElementById("input").value;
+        const regex = /^[0-9]+$/;
+        if (regex.test(inputValue)) {
+          if (input == "Fahrenheit") {
+            const x = (inputValue - 32) * (5 / 9);
+            const y = (inputValue - 32) * (5 / 9) + 273.15;
+            document.getElementById("result").value =
+              inputValue +
+              "\u00B0 Fahrenheit in Celsius is " +
+              x +
+              "\u00B0C\nIn Kelvin is " +
+              y +
+              "K";
+          } else if (input == "Celsius") {
+            const x = inputValue * (9 / 5) + 32;
+            const y = parseFloat(inputValue) + 273.15;
+            document.getElementById("result").value =
+              inputValue +
+              "\u00B0 Celsius in Fahrenheit is " +
+              x +
+              "\u00B0F\nIn Kelvin is " +
+              y +
+              "K";
+          } else {
+            const x = parseFloat(inputValue) - 273.15;
+            const y = (inputValue - 273.15) * (9 / 5) + 32;
+            document.getElementById("result").value =
+              inputValue +
+              " Kelvin in Fahrenheit is " +
+              y +
+              "\u00B0F\nIn Celsius is " +
+              x +
+              "\u00B0C";
+          }
+        } else {
+          document.getElementById("displayItem").style.display = "block";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 align=middle>Temperature Converter</h1>
+      <div class="contents">
+        <div>
+          Degrees:<br /><input type="text" id="inputText" /><br />
+          <p id="displayItem">* Invalid Input! Please enter an integer</p>
+        </div>
+        <div>
+          Select Type:<br />
+          <input list="types" id="input" />
+          <datalist id="types">
+            <option id="op1" value="Fahrenheit" selected></option>
+            <option id="op2" value="Celsius"></option>
+            <option id="op3" value="Kelvin"></option></datalist
+          ><br />
+          <button onclick="convertTemp()">Convert</button>
+        </div>
+      </div>
+      <div>
+        &nbsp; Result:<br />
+        <textarea type="text" id="result" cols="50"></textarea>
+      </div>
+    </div>
+  </body>
+</html>
