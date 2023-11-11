@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    * {
+      font-weight: bold;
+      font-size: large;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: rgb(91, 91, 232);
+    }
+    .grid-container {
+      margin: 0 auto;
+      width: 100%;
+      /* Adjusted width to be 100% */
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      background-color: #2196f3;
+      gap: 4px 4px;
+      padding: 20px;
+      border-radius: 30px;
+    }
+
+    .grid-item {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      cursor: pointer;
+      box-shadow: 3px 3px 6px red,
+        -2px -2px 5px red;
+      transform: scale(1.05);
+      transition: .3s;
+    }
+
+    .item1 {
+      grid-column-start: span 2;
+    }
+
+    .item2 {
+      grid-column-start: span 5;
+    }
+
+    .item {
+      background-color: bisque;
+    }
+    .item3 {
+      background-color: rgb(153, 242, 20);
+    }
+
+    @media (max-width: 360px) {
+      .grid-container {
+        width: 100%;
+      }
+    }
+
+    input[type='text'] {
+      background-color: rgb(221, 208, 203);
+      border-radius: 20px;
+    }
+
+    h1{
+      font-size:30px;
+      text-align:center;
+    }
+  </style>
+  <script>
+    let exp;
+    function display(val) {
+      exp = document.getElementById("displayItem").value += val;
+
+    }
+    function deletion() {
+      exp = exp.slice(0, -1);
+      document.getElementById("displayItem").value = exp;
+    }
+    const clearDisplay = () => {
+      exp = '';
+      document.getElementById("displayItem").value = exp;
+
+    }
+    const solve = () => {
+      try {
+          var expr=document.getElementById("displayItem").value;
+          console.log(expr);
+          document.getElementById("displayItem").value = eval(expr);
+          return ;
+        if(exp!==""){
+          document.getElementById("displayItem").value = eval(exp);
+          exp="";
+        }
+      }
+      catch (err) {
+        document.getElementById("displayItem").value = "Invalid Expression";
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Calculator</h1>
+    <div class="grid-container">
+      <input type="text" class="grid-item item2" id="displayItem"></input>
+      <button class="grid-item item" onclick="display('\u0028')">(</button>
+      <button class="grid-item item" onclick="display('\u0029')">)</button>
+      <button class="grid-item item item1" onclick="clearDisplay()">Cls</button>
+      <button class="grid-item item" onclick="deletion()">del</button>
+      <button class="grid-item" onclick="display('7')">7</button>
+      <button class="grid-item" onclick="display('8')">8</button>
+      <button class="grid-item" onclick="display('9')">9</button>
+      <button class="grid-item item" onclick="display('%')">%</button>
+      <button class="grid-item item" onclick="display('**')">^</button>
+      <button class="grid-item" onclick="display('4')">4</button>
+      <button class="grid-item" onclick="display('5')">5</button>
+      <button class="grid-item" onclick="display('6')">6</button>
+      <button class="grid-item item" onclick="display('*')">X</button>
+      <button class="grid-item item" onclick="display('/')">/</button>
+      <button class="grid-item" onclick="display('1')">1</button>
+      <button class="grid-item" onclick="display('2')">2</button>
+      <button class="grid-item" onclick="display('3')">3</button>
+      <button class="grid-item item" onclick="display('+')">+</button>
+      <button class="grid-item item" onclick="display('-')">-</button>
+      <button class="grid-item" onclick="display('.')">.</button>
+      <button class="grid-item item1" onclick="display('0')">0</button>
+      <button class="grid-item item3 item item1" onclick="solve()">=</button>
+    </div>
+  </div>
+</body>
+
+</html>
